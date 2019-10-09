@@ -127,19 +127,19 @@ void piePagina(){
  * @param matched Almacena la linea que comienza con la cadena matchStr.
  * @param matchStr Cadena a buscar.
  */
-void getMatch(char* filename, char* matched, char* matchStr){//1=direc del archivo - 2=cadena donde pongo todo lo de la fila - 3=cadena a buscar
+void getMatch(char* filename, char* matched, char* matchStr){
 	char buffer[BUFFSIZE]; //defino de forma arbitraria que la linea no va a tener mas caracteres que BUFFSIZE, total la funcion fgets que utilizo para leer la linea deja de leer una vez que encuentra LF o EOF
 	char* match = NULL;
 	FILE* fd;
 	fd = fopen(filename,"r");
 	while(feof(fd) == 0){
-		fgets(buffer, BUFFSIZE, fd);  //guardo en buffer una linea del archivo fd
-		match = strstr(buffer, matchStr);      //busca en buffer la cadena matchStr, y si la encuentro devuelvo esa linea
+		fgets(buffer, BUFFSIZE, fd);           //esta funcion es la que extrae una linea del archivo
+		match = strstr(buffer, matchStr);      //esta funcion busca en la linea extraida la cadena matchStr, y devuelve el recorte de la linea desde el comienzo de matchStr
 		if(match!=NULL) break;
 	}
 
 	fclose(fd);
-	strcpy(matched,match); //pongo esa linea en matched
+	strcpy(matched,match);
 	return;
 }
 
